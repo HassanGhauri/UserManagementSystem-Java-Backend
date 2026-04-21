@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import com.UserManagmentSystems.UserManagementSystem.models.User;
 import com.UserManagmentSystems.UserManagementSystem.repositories.UserRep.UserRepo;
+import com.UserManagmentSystems.UserManagementSystem.utils.JwtUtil;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,8 @@ public class UserController {
 
     @Autowired
     UserRepo repo;
+    @Autowired
+    JwtUtil jwtUtil;
 
     @GetMapping("/users")
     public List<User> getAllUsers() {
@@ -55,9 +58,10 @@ public class UserController {
                     && user.getPassword().equals(loginUser.getPassword())) {
 
                 Map<String, Object> response = new HashMap<>();
+                String token = jwtUtil.generateToken(user.getEmail());
                 response.put("success", true);
                 response.put("message", "Login Successful");
-                response.put("status", 200);
+                response.put("token", token);
                 response.put("user", user);
 
                 return ResponseEntity.ok(response);
