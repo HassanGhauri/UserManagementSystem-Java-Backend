@@ -2,26 +2,37 @@ package com.UserManagmentSystems.UserManagementSystem.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="user_data")
+@Table(name = "user_data")
 public class User {
+
     @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(name="First_Name")
     private String firstname;
+
     @Column(name="last_Name")
     private String lastname;
+
     @Column(name="Email")
     private String email;
+
     @Column(name="Password")
     private String password;
+
     @Column(name="Age")
     private int age;
+
     @Column(name="Profession")
     private String profession;
+
     @Column(name="Role")
     private String role;
     public int getId() {
