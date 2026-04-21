@@ -58,7 +58,7 @@ public class UserController {
                     && user.getPassword().equals(loginUser.getPassword())) {
 
                 Map<String, Object> response = new HashMap<>();
-                String token = jwtUtil.generateToken(user.getEmail());
+                String token = jwtUtil.generateToken(user);
                 response.put("success", true);
                 response.put("message", "Login Successful");
                 response.put("token", token);
